@@ -4,8 +4,8 @@ cnt=n//d+m//d+k//d
 cnt = n // d + m // d + k // d
 ans = k
 
-# [B] 짜장면에 더하는 경우
-n1 =((n // d + 1) * d) - n
+
+n1 =d-n%d
 if n % d != 0 and k - n1 >= 0:
     new_cnt = n // d + 1 + m // d + (k - n1) // d
     if cnt == new_cnt:
@@ -14,8 +14,8 @@ if n % d != 0 and k - n1 >= 0:
         cnt = new_cnt
         ans = k - n1
 
-# [C] 짬뽕에 더하는 경우
-m1 =  ((m // d + 1) * d) - m
+
+m1 =  d-m%d
 if m % d != 0 and k - m1 >= 0:
     new_cnt = n // d + (m // d + 1) + (k - m1) // d
     if cnt == new_cnt:
@@ -34,5 +34,5 @@ if n % d != 0 and m % d != 0 and k - k1 >= 0:
         cnt = new_cnt
         ans = k - k1
 
-# 결과 출력
+
 print(ans)
