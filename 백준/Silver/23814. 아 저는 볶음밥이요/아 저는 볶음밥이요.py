@@ -15,7 +15,7 @@ if n % d != 0 and k - n1 >= 0:
         ans = k - n1
 
 
-m1 =  d-m%d
+m1 = d-m%d
 if m % d != 0 and k - m1 >= 0:
     new_cnt = n // d + (m // d + 1) + (k - m1) // d
     if cnt == new_cnt:
