@@ -10,26 +10,32 @@ apples=[]
 for i in range(k):
     a,b=map(int,input().split())
     apples.append([a-1,b-1])
+
+
 array=deque()
 l =int(input())
 for i in range(l):
-    array.append(input().split())
+    time, direction = input().split()
+    array.append((int(time), direction))
 
 q=deque()
 q.append((0,0))
-time=int(array[0][0])
-v="D"
-change=0
+time, v = array.popleft() if array else (float('inf'), None)
 now=0
-case=1
+case=0
+dx=[0,1,0,-1]
+dy=[1,0,-1,0]
 while(q):
     x,y=q.popleft()
+
+    nx=x+dx[case]
+    ny=y+dy[case]
         #y축 이동
-    if(case==3 and 0<=y-1 and (x,y-1) not in q):
-        if [x,y-1] in apples:
+    if(0<=nx<n and 0<=ny<n and (nx,ny) not in q):
+        if [nx,ny] in apples:
             q.appendleft((x,y))
-            q.appendleft((x,y-1))
-            re=apples.index([x,y-1])
+            q.appendleft((nx,ny))
+            re=apples.index([nx,ny])
             del apples[re]
             now+=1
         else:
@@ -37,63 +43,23 @@ while(q):
                 q.appendleft((x, y))
                 q.pop()
 
-            q.appendleft((x,y-1))
-            now += 1
-    elif(case==1 and y+1<n and (x,y+1) not in q):
-            if [x,y+1] in apples:
-                q.appendleft((x, y))
-                q.appendleft((x,y+1))
-                re=apples.index([x,y+1])
-                del apples[re]
-                now += 1
-            else:
-                if(len(q)>0):
-                    q.appendleft((x, y))
-                    q.pop()
-                q.appendleft((x,y+1))
-                now += 1
-    elif(case==4 and 0<=x-1 and (x-1,y) not in q):
-        if [x-1,y] in apples:
-            q.appendleft((x, y))
-            q.appendleft((x-1,y))
-            re=apples.index([x-1,y])
-            del apples[re]
-            now += 1
-        else:
-            if(len(q)>0):
-                q.appendleft((x, y))
-                q.pop()
-            q.appendleft((x-1,y))
-            now += 1
-
-    elif(case==2 and x+1<n and (x+1,y) not in q ):
-        if [x+1,y] in apples:
-            q.appendleft((x, y))
-            q.appendleft((x+1,y))
-            re=apples.index([x+1,y])
-            del apples[re]
-            now += 1
-        else:
-            if(len(q)>0):
-                q.appendleft((x, y))
-                q.pop()
-            q.appendleft((x+1,y))
+            q.appendleft((nx,ny))
             now += 1
     else:
         now+=1
         break
 
 
-    if now==int(time):
-        time,v=array.popleft()
-        if(len(array)>0):
-            time=array[0][0]
-        else:
-            time=5000000
+    if now==time:
 
-        if(case==1):
+        if(case==0):
             if v=="L":
-                case=4
+                case=3
+            else:
+                case=1
+        elif case==1:
+            if v=="L":
+                case=0
             else:
                 case=2
         elif case==2:
@@ -105,11 +71,10 @@ while(q):
             if v=="L":
                 case=2
             else:
-                case=4
-        elif case==4:
-            if v=="L":
-                case=3
-            else:
-                case=1
+                case=0
+        if array:
+            time, v = array.popleft()
+        else:
+            time = float('inf')
 
 print(now)
