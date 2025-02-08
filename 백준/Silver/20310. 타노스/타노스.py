@@ -6,16 +6,12 @@ b=list.count("0")
 a_count=0
 b_count=0
 
-for i in range(len(list)):
-    if a_count<a//2:
-        if(list[i]=="1"):
-            del list[i]
-            a_count+=1
+for i in range(a//2):
+    list.pop(list.index("1"))
+
+list=list[::-1]
+for i in range(b//2):
+    list.pop(list.index("0"))
 
 
-for i in range(len(list)-1,-1,-1):
-    if b_count<b//2:
-        if(list[i]=="0"):
-            del list[i]
-            b_count+=1
-print("".join(list))
+print("".join(list[::-1]))
