@@ -1,5 +1,7 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 /*
    사용하는 클래스명이 Solution 이어야 하므로, 가급적 Solution.java 를 사용할 것을 권장합니다.
@@ -21,25 +23,32 @@ class Solution
         }
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int T = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        
+        int T = Integer.parseInt(st.nextToken());
+        
         for (int t = 1; t <= T; t++) {
-            int n = sc.nextInt();
+            st = new StringTokenizer(br.readLine());
+            int n = Integer.parseInt(st.nextToken());
 
             int[][] array = new int[n][n];
             for (int i = 0; i < n; i++) {
+                st = new StringTokenizer(br.readLine());
                 for (int j = 0; j < n; j++) {
-                    array[i][j] = sc.nextInt();
+                    array[i][j] = Integer.parseInt(st.nextToken());
                 }
             }
 
             // 방문 처리
             boolean[][] visited = new boolean[n][n];
-            int sx = sc.nextInt();
-            int sy = sc.nextInt();
-            int ex = sc.nextInt();
-            int ey = sc.nextInt();
+            st = new StringTokenizer(br.readLine());
+            int sx = Integer.parseInt(st.nextToken());
+            int sy = Integer.parseInt(st.nextToken());
+            st = new StringTokenizer(br.readLine());
+            int ex = Integer.parseInt(st.nextToken());
+            int ey = Integer.parseInt(st.nextToken());
 
             int ans = bfs(sx, sy, array, visited, n, ex, ey);
             System.out.printf("#%d %d",t,ans);
