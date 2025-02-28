@@ -7,11 +7,12 @@ def food_comb(k,s,v):
         food_comb2(0,0,v,new_temp)
         return
     else:
-        for i in range(s,n):
+        for i in range(s,n+(k-n//2)+1):
             food_temp[k]=i
             v[i]=True
             food_comb(k+1,i+1,v)
             v[i]=False
+
 def food_comb2(k,s,v,temp):
     global food
     if k == n // 2:
@@ -21,7 +22,6 @@ def food_comb2(k,s,v,temp):
             new_temp.append(i)
         if tuple(sorted(new_temp)) not in food:
             food.append((tuple(sorted(temp)),tuple(sorted(new_temp))))
-            # food.append(tuple(sorted(new_temp)))  # 새로운 조합 추가
         return
     else:
         for i in range(s, n):
@@ -30,12 +30,15 @@ def food_comb2(k,s,v,temp):
                 v[i] = True
                 food_comb2(k + 1, i + 1, v,temp)
                 v[i] = False
-def calculate_pair_sum(arr, array):
-    total = 0
-    for i in range(len(arr)):
+
+def calculate_pair_sum(arr, arr2,array):
+    total1 = 0
+    total2 = 0
+    for i in range(len(arr)-1):
         for j in range(i + 1, len(arr)):
-            total += array[arr[i]][arr[j]] + array[arr[j]][arr[i]]  # Add both directions
-    return total
+            total1 += array[arr[i]][arr[j]] + array[arr[j]][arr[i]]  # Add both directions
+            total2 += array[arr2[i]][arr2[j]] + array[arr2[j]][arr2[i]]
+    return abs(total1-total2)
 
 
 test=int(input())
@@ -55,7 +58,7 @@ for t in range(1,test+1):
     # print(food)
     for x, y in food:
 
-        sum_x = calculate_pair_sum(x, array)
-        sum_y = calculate_pair_sum(y, array)
-        ans = min(ans, abs(sum_x - sum_y))
+        sum = calculate_pair_sum(x,y, array)
+
+        ans = min(ans,sum)
     print("#{} {}".format(t,ans))
