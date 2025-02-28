@@ -1,10 +1,14 @@
 def food_comb(k,s,v):
+    global ans
     if k==n//2:
-        new_temp=[]
 
-        for i in food_temp:
-            new_temp.append(i)
-        food_comb2(0,0,v,new_temp)
+        tcnt=0
+        for i in range(n):
+            if not v[i]:
+                food_temp2[tcnt]=i
+                tcnt+=1
+        sum=calculate_pair_sum(food_temp,food_temp2,array)
+        ans=min(ans,sum)
         return
     else:
         for i in range(s,n+(k-n//2)+1):
@@ -13,23 +17,7 @@ def food_comb(k,s,v):
             food_comb(k+1,i+1,v)
             v[i]=False
 
-def food_comb2(k,s,v,temp):
-    global food
-    if k == n // 2:
-        new_temp=[]
 
-        for i in food_temp2:
-            new_temp.append(i)
-        if tuple(sorted(new_temp)) not in food:
-            food.append((tuple(sorted(temp)),tuple(sorted(new_temp))))
-        return
-    else:
-        for i in range(s, n):
-            if not v[i]:
-                food_temp2[k] = i
-                v[i] = True
-                food_comb2(k + 1, i + 1, v,temp)
-                v[i] = False
 
 def calculate_pair_sum(arr, arr2,array):
     total1 = 0
@@ -52,13 +40,9 @@ for t in range(1,test+1):
     food_temp=[ -1 for _ in range(n//2)]
     food_temp2=[ -1 for _ in range(n//2)]
     visted = [False for _ in range(n)]
+    ans = 1e9
     food_comb(0,0,visted)
     # print(food)
-    ans = 1e9
+
     # print(food)
-    for x, y in food:
-
-        sum = calculate_pair_sum(x,y, array)
-
-        ans = min(ans,sum)
     print("#{} {}".format(t,ans))
