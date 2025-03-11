@@ -1,32 +1,39 @@
 import sys
-import heapq 
+import heapq
 
 input = sys.stdin.readline
 
-n = int(input())
-m = int(input())
-graph = [[] for _ in range(n+1)]
+n=int(input())
 
-for _ in range(m):
-    a, b, cost = map(int, input().split())
-    graph[a].append([b, cost])
-        
-start, end = map(int, input().split())
-costs = [1e9 for _ in range(n+1)]
-heap = []
-costs[start] = 0
-heapq.heappush(heap, [0, start])
-    
-while heap:
-    cur_cost, cur_v = heapq.heappop(heap)
-    if costs[cur_v] < cur_cost:
+bus=int(input())
+
+array=[[] for _ in range(n+1)]
+
+for i in range(bus):
+    a,b,c=map(int,input().split())
+    array[a].append((c,b))
+
+
+start,end=map(int,input().split())
+
+
+dist=[1e9 for _ in range(n+1)]
+
+q=[]
+heapq.heappush(q,(0,start))
+
+dist[start]=0
+
+while q:
+    cost,idx=heapq.heappop(q)
+    if dist[idx]<cost:
         continue
-    for next_v, next_cost in graph[cur_v]:
-        sum_cost = cur_cost + next_cost
-        if sum_cost >= costs[next_v]:
-            continue
-        
-        costs[next_v] = sum_cost
-        heapq.heappush(heap, [sum_cost, next_v])
-        
-print(costs[end])
+
+    for next_cost,next_node in array[idx]:
+        new_cost=cost+next_cost
+        if dist[next_node]>new_cost:
+            dist[next_node]=new_cost
+            heapq.heappush(q,(new_cost,next_node))
+
+
+print(dist[end])
