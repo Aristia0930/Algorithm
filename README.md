@@ -13,7 +13,7 @@ This is an auto push repository for Baekjoon Online Judge created with [Baekjoon
 - 
 
 ### 2️⃣ **탐색 (Search)**  
-- [투 포인터](./study/Two Pointer.md)
+- [투 포인터](./study/Two%20Pointer.md)
 
 ### 3️⃣ **그래프 (Graph)**  
 - 
