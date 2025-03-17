@@ -1,5 +1,6 @@
 # Algorithm
-This is an auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+ 현재 파이썬에서 자바로 언어 변경주에 있습니다.
+ [백준]( http://mazassumnida.wtf/api/v2/generate_badge?boj=wlsrb4013)
 # 📝 알고리즘 문제 풀이 저장소  
 
 ## 📚 소개  
