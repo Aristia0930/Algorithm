@@ -6,6 +6,9 @@ class Solution {
         String answer="";
         int index = 0;
         int count = 0;
+        if (p==m){
+            p=0;
+        }
 
         while (answer.length() < t) {
             String num = Integer.toString(index, n).toUpperCase(); 
@@ -16,16 +19,14 @@ class Solution {
                 count++;  
                 
 
-                if (count ==p ) {
+                if (count %m==p ) {
                     answer+=String.valueOf(num.charAt(i));
                 }
                 
                 if (answer.length() == t) {
                     break;
                 }
-                if (count==m){
-                    count=0;
-                }
+
             }
         }
         
